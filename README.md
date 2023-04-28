@@ -1,76 +1,14 @@
-# Unit 12 Mini-Project: Movie Database
+# Movie Database
 
-In this mini-project, you will build Rest API routes for creating, retrieving, and deleting movies from a MySQL database.
+## Description
 
-## User Stories
+A small backend service for maintaining a database of movies and associated reviews.
 
-* As a user, I want to create a new database.
+## Contributors
 
-* As a user, I want to store movie names and reviews in the database in two separate table.
+- Rogelio Sanchez
+- Evan Schindler
 
-* As a user, I want to see a list of all movies.
+## Installation
 
-* As a user, I want to be able to create and delete a movie.
-
-* As a user, I want to return a list of all the reviews and the associated movie name.
-
-## Acceptance Criteria
-
-* It's done when `movie_db` is created and contains a `movies` and `reviews` table.
-
-* It's done when `movie_db` has been seeded with data.
-
-
-* It's done when the `/api/add-movie` route successfully adds a movie when tested using Insomnia. (post)
-
-* It's done when the `/api/movies` route renders a list of all movies. (get)
-
-* It's done when the `/api/movie/:id` route deletes a route when tested using Insomnia. (delete)
-
-
-* It's done when the `/api/movie-reviews` route successfully gets all movies and the associated reiviews. (get)(join)
-
-* It's done when the `/api/review/:id` route successfully updates a review pertaining to a specific movie. (put)
-
-
-
----
-
-## Assets
-
-Design the following database schema that contains two tables:
-
-![The database schema includes a movies table and a reviews table, linked by the movie id.](./assets/image_1.png)
-
----
-
-## Notes
-
-To test your routes you will use Insomnia. If you have not already downloaded it, you will need to visit the [Insomnia download page](https://insomnia.rest/download) and do so.
-
-Refer to the documentation:
-
-[Insomnia documentation on getting started](https://support.insomnia.rest/category/152-using-insomnia)
-
-[Express.js documentation on routing](https://expressjs.com/en/guide/routing.html)
-
-[MySQL documentation on joins](https://dev.mysql.com/doc/refman/8.0/en/join.html)
-
-[npm documentation on MySQL2](https://www.npmjs.com/package/mysql2)
-
-## 💡 Hints
-
-How can you link your `movies` and `reviews` tables?
-
-How can you execute a query in an Express.js server using the npm `MySQL2` package?
-
-## 🏆 Bonus
-
-If you have completed this activity, work through the following challenge with your partner to further your knowledge:
-
-* How can you add a route to update a review?
-
-Use [Google](www.google.com) or another search engine to research this.
-
----
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+Clone the repo, cd into the repo, run 'npm i', seed the database using mysql (first run schema.sql then seeds.sql), then run 'npm start' and use Insomnia or Postman to send API requests to update the database.
