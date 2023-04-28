@@ -56,6 +56,20 @@ app.get('/api/movies', (req, res) => {
     })
 });
 
+app.delete('/api/movie/:id', (req, res) => {
+    console.info(`${req.method} request received to /api/movie/:id`);
+    console.log(req);
+    db.query(`DELETE FROM movies WHERE id = ${req.params.id};`, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(400).send("database error");
+        } else {
+            console.log(result);
+            res.json(result);
+        }
+    })
+});
+
 
 // db.query(`DELETE FROM course_names WHERE id = ?`, num, (err, result) => {
 //   if (err) {
