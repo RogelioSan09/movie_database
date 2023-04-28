@@ -36,7 +36,7 @@ app.post('/api/add-movie', (req, res) => {
                   res.status(400).send("database error");
                 } else {
                     console.log(result);
-                    res.send("Success!");
+                    res.send("Movie added!");
                 }
             });
         }
@@ -50,7 +50,7 @@ app.get('/api/movies', (req, res) => {
             console.log(err);
             res.status(400).send("database error");
         } else {
-            console.log(result);
+            console.log("Movies retrieved!");
             res.json(result);
         }
     })
@@ -58,18 +58,31 @@ app.get('/api/movies', (req, res) => {
 
 app.delete('/api/movie/:id', (req, res) => {
     console.info(`${req.method} request received to /api/movie/:id`);
-    console.log(req);
     db.query(`DELETE FROM movies WHERE id = ${req.params.id};`, (err, result) => {
         if (err) {
             console.log(err);
             res.status(400).send("database error");
         } else {
             console.log(result);
-            res.json(result);
+            res.send("Movie deleted!");
         }
     })
 });
 
+app.get('/api/movie-reviews', (req, res) => {
+    console.info(`${req.method} request received to /api/movie-reviews`);
+    db.query(`SELECT movies.movie_name AS Title, reviews.review AS Review
+                FROM movies JOIN reviews ON movies.id = reviews.movie_id
+                WHERE reviews.review IS NOT NULL;`, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(400).send("database error");
+        } else {
+            console.log("Movie reviews retrieved!");
+            res.json(result);
+        }
+    })
+});
 
 // db.query(`DELETE FROM course_names WHERE id = ?`, num, (err, result) => {
 //   if (err) {
