@@ -28,18 +28,33 @@ app.post('/api/add-movie', (req, res) => {
     db.query(`INSERT INTO movies (movie_name) VALUES ("${movie_name}");`, (err, result) => {
         if (err) {
           console.log(err);
+          res.status(400).send("database error");
         } else {
             db.query(`INSERT INTO reviews (movie_id) VALUES (${result.insertId});`, (err, result) => {
                 if (err) {
                   console.log(err);
+                  res.status(400).send("database error");
                 } else {
                     console.log(result);
+                    res.send("Success!");
                 }
-            })
+            });
         }
     });
-    res.send("Success!");
-})
+});
+
+app.get('/api/movies', (req, res) => {
+    console.info(`${req.method} request received to /api/movies`);
+    db.query(`SELECT * FROM movies;`, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(400).send("database error");
+        } else {
+            console.log(result);
+            res.json(result);
+        }
+    })
+});
 
 
 // db.query(`DELETE FROM course_names WHERE id = ?`, num, (err, result) => {
