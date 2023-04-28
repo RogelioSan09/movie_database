@@ -11,15 +11,12 @@ const db = mysql.createConnection(
   {
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    password: '', // add your own password here
     database: 'movie_db'
   },
   console.log(`Connected to the movie_db database.`)
 );
 
-var addMovie = {
-    movie_name: "Title of the Movie"
-}
 
 app.post('/api/add-movie', (req, res) => {
     console.info(`${req.method} request received to /api/add-movie`);
