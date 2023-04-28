@@ -53,7 +53,7 @@ app.get('/api/movies', (req, res) => {
             console.log("Movies retrieved!");
             res.json(result);
         }
-    })
+    });
 });
 
 app.delete('/api/movie/:id', (req, res) => {
@@ -63,17 +63,16 @@ app.delete('/api/movie/:id', (req, res) => {
             console.log(err);
             res.status(400).send("database error");
         } else {
-            console.log(result);
-            res.send("Movie deleted!");
+            console.log("Movie deleted!");
+            res.json(result);
         }
-    })
+    });
 });
 
 app.get('/api/movie-reviews', (req, res) => {
     console.info(`${req.method} request received to /api/movie-reviews`);
-    db.query(`SELECT movies.movie_name AS Title, reviews.review AS Review
-                FROM movies JOIN reviews ON movies.id = reviews.movie_id
-                WHERE reviews.review IS NOT NULL;`, (err, result) => {
+    db.query(`SELECT movies.movie_name AS Title, reviews.review AS Review, reviews.id AS ReviewID
+                FROM movies JOIN reviews ON movies.id = reviews.movie_id;`, (err, result) => {
         if (err) {
             console.log(err);
             res.status(400).send("database error");
@@ -81,22 +80,24 @@ app.get('/api/movie-reviews', (req, res) => {
             console.log("Movie reviews retrieved!");
             res.json(result);
         }
-    })
+    });
 });
 
-// db.query(`DELETE FROM course_names WHERE id = ?`, num, (err, result) => {
-//   if (err) {
-//     console.log(err);
-//   }
-//   console.log("affectedRows: ", result.affectedRows);
-// });
+app.put('/api/review/:id', (req, res) => {
+    console.info(`${req.method} request received to /api/review/:id`);
+    db.query(`UPDATE reviews
+                SET review = "${req.body.review}"
+                WHERE id = ${req.params.id};`, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(400).send("database error");
+        } else {
+            console.log("Movie review updated!");
+            res.json(result);
+        }
+    });
+});
 
-// // Query database
-// db.query('SELECT * FROM course_names', function (err, results) {
-//   console.log(results);
-// });
-
-// Default response for any other request (Not Found)
 app.use((req, res) => {
   res.status(404).end();
 });
